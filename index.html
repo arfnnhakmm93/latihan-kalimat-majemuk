@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Kalimat Majemuk Setara - Kelas 4</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(160deg,#f9ecd4 0%,#d8efdd 38%,#dcd2f7 70%,#f9dfe9 100%);color:#3f3a4d;min-height:100vh;padding:16px}
+button{font-family:inherit;touch-action:manipulation}
+.wrap{max-width:800px;margin:0 auto}
+header{text-align:center;background:#fffdf7;border-radius:20px;padding:20px 16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(180,150,200,.18);border-top:6px solid #f9a8c9}
+header h1{font-size:1.3rem;color:#6a3fb5}
+header p{font-size:.9rem;color:#8a8496;margin-top:6px}
+#playerBadge{display:none;margin-top:10px;font-weight:800;color:#5b4a8a;background:#e9defc;border-radius:999px;padding:6px 14px;font-size:.95rem}
+.hint{background:#fff8e6;border:1px dashed #d9a521;border-radius:14px;padding:12px 14px;font-size:.85rem;margin-bottom:16px;line-height:1.6;color:#6b5f45}
+.hint .warn{display:block;margin-top:8px;font-weight:800;color:#c2274b;background:#ffe4ea;border-radius:8px;padding:6px 10px}
+.bank{background:#fffdf7;border-radius:18px;padding:16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(180,150,200,.18);position:sticky;top:8px;z-index:10;border:2px solid #f3e8ff}
+.bank h2{font-size:1rem;margin-bottom:10px;color:#7c5cbf}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#e8e4fb;color:#4a4458;border:none;border-radius:999px;padding:10px 18px;min-height:44px;font-size:1rem;font-weight:700;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;box-shadow:0 2px 4px rgba(150,130,190,.3)}
+.chips .chip:nth-child(5n+1){background:#ffd9e3}
+.chips .chip:nth-child(5n+2){background:#ffe6bd}
+.chips .chip:nth-child(5n+3){background:#c9f0d8}
+.chips .chip:nth-child(5n+4){background:#cfe8ff}
+.chips .chip:nth-child(5n+5){background:#ddd2f7}
+.chip:active{cursor:grabbing}
+.chip.selected{outline:3px solid #f9a8c9;transform:scale(1.05)}
+.drag-ghost{position:fixed;left:0;top:0;z-index:99;pointer-events:none;opacity:.93;transform:translate(-50%,-50%) scale(1.06);margin:0}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#quiz .card{animation:rise .35s ease backwards}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(125,185,247,0)}50%{box-shadow:0 0 0 4px rgba(125,185,247,.45)}}
+.drop:not(.filled){animation:pulse 2s infinite}
+.chip{transition:transform .15s}
+button.big,.charBtn,#startBtn,#muteBtn{transition:transform .1s}
+button.big:active,.charBtn:active,#startBtn:active,#muteBtn:active{transform:scale(.96)}
+.modal{animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+#muteBtn{background:#efe8fa;color:#4a4458;border:none;border-radius:999px;padding:8px 18px;min-height:44px;font-weight:800;cursor:pointer;font-size:.9rem;margin-top:10px}
+.card{background:#ffffff;border:2px solid #efe6fb;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 3px 12px rgba(120,90,160,.18);border-left:6px solid #f9a8c9;max-width:100%}
+#quiz .card:nth-child(5n+1){border-color:#f9a8c9}
+#quiz .card:nth-child(5n+2){border-color:#f6c453}
+#quiz .card:nth-child(5n+3){border-color:#6ed7a0}
+#quiz .card:nth-child(5n+4){border-color:#7db9f7}
+#quiz .card:nth-child(5n+5){border-color:#b79ced}
+.qnum{display:inline-block;font-weight:800;color:#6a4fb3;font-size:.9rem;margin-bottom:8px;background:#ede9fe;border-radius:999px;padding:2px 14px}
+.step{display:flex;gap:10px;align-items:flex-start;padding:10px 0;overflow-wrap:anywhere;max-width:100%}
+.step+.step{border-top:1px dashed #d9cfee}
+.snum{flex:none;width:28px;height:28px;border-radius:50%;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.95rem;margin-top:2px}
+.s1{background:#ffd9e3;color:#7a2f45}
+.s2{background:#cfe8ff;color:#2c4f7a}
+.s3{background:#c9f0d8;color:#1d5c3a}
+.sbody{flex:1;min-width:0}
+.stitle{font-weight:800;color:#5b3fa8;margin-bottom:6px;font-size:.95rem}
+.sent{background:#f6f1ff;border-radius:10px;padding:8px 12px;margin:4px 0;font-size:1rem;line-height:1.7}
+.out{font-weight:700}
+.out.done{color:#1d9e57}
+.out.wait{color:#a49db5;font-style:italic;font-weight:600}
+.drop{min-width:130px;min-height:44px;border:2px dashed #a8cdea;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;padding:4px 12px;font-weight:800;color:#3d6a9e;background:#eef6ff;cursor:pointer;vertical-align:middle}
+.drop.filled{border-style:solid;border-color:#5ecf8f;background:#d9f4e3;cursor:not-allowed}
+.drop.hover{border-color:#7db9f7;background:#d6e9ff;transform:scale(1.03)}
+.drop .chip{pointer-events:none;margin:0;background:transparent;box-shadow:none;padding:0;min-height:0}
+.actions{display:flex;gap:10px;margin:16px 0}
+button.big{flex:1;border:none;border-radius:14px;padding:14px;min-height:48px;font-size:1rem;font-weight:800;cursor:pointer}
+#reset{background:#ddd2f7;color:#4a4458}
+#showScore{background:#8fe3b3;color:#234d33}
+#showScore:disabled{background:#e9e2f2;color:#a09aad;cursor:not-allowed}
+footer{text-align:center;font-size:.8rem;color:#a49db5;padding:12px}
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.overlay.hidden{display:none}
+.modal{background:#fffaf0;border-radius:20px;padding:24px 20px;max-width:480px;width:100%;max-height:90vh;overflow:auto;text-align:center;box-shadow:0 10px 40px rgba(120,90,160,.3);border:3px solid #f3e8ff}
+.modal h2{color:#7c5cbf;margin-bottom:6px}
+.modal p.sub{font-size:.88rem;color:#8a8496;margin-bottom:14px}
+.chars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.charBtn{border:3px solid #e7defa;background:#f6f1ff;border-radius:14px;padding:12px 6px;min-height:64px;font-size:2rem;cursor:pointer}
+.charBtn small{display:block;font-size:.7rem;font-weight:700;color:#7c6f8f;margin-top:4px}
+.charBtn.picked{border-color:#b79ced;background:#e9defc}
+#nameInput{width:100%;border:2px solid #c9bff0;border-radius:12px;padding:12px;min-height:48px;font-size:1rem;margin-bottom:6px;text-align:center;background:#fff;color:#4a4458}
+#nameInput:focus{outline:none;border-color:#b79ced;box-shadow:0 0 0 3px #e9defc}
+#gateErr{color:#c2274b;font-size:.82rem;font-weight:700;min-height:1.2em;margin-bottom:8px}
+#startBtn{background:#b79ced;color:#3b2665;border:none;border-radius:14px;padding:14px;min-height:48px;width:100%;font-size:1rem;font-weight:800;cursor:pointer}
+#scoreBig{font-size:3rem;font-weight:900;color:#22a06b;margin:8px 0}
+#reviewList{text-align:left;margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.revItem{margin-bottom:6px}
+.revbox{border-radius:12px;padding:10px 12px;margin-top:8px;font-size:.9rem;line-height:1.6}
+.revbox.bad{background:#ffe9ec;border:2px solid #f27d92;color:#6b4a52}
+.revbox.good{background:#e2f7e9;border:2px solid #4cc98a;color:#234d33}
+.revbox .rl{font-weight:800;font-size:.85rem;margin-bottom:4px}
+.revbox.bad .rl{color:#c2274b}
+.revbox.good .rl{color:#1d9e57}
+.why{background:#fff8e6;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:.86rem;line-height:1.6;color:#6b5f45}
+.modalRow{display:flex;gap:10px;margin-top:16px}
+.modalRow button{flex:1;border:none;border-radius:12px;padding:12px;min-height:48px;font-weight:800;cursor:pointer;font-size:.95rem}
+#closeResult{background:#efe8fa;color:#4a4458}
+#newQuiz{background:#f9a8c9;color:#5b2140}
+@media (max-width:640px){.bank{top:4px;padding:10px 12px}.bank h2{font-size:.9rem;margin-bottom:8px}.card{scroll-margin-top:290px}}
+@media (max-width:480px){
+body{padding:12px}
+header h1{font-size:1.15rem}
+.card{padding:12px}
+.actions{flex-direction:column}
+.modalRow{flex-direction:column}
+.drop{min-width:110px}
+.modal{padding:20px 14px}
+.charBtn{font-size:1.7rem;min-height:60px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>🏠 Latihan Kalimat Majemuk Setara</h1>
+<p>Bahasa Indonesia Kelas 4 • BAB 2 Di Atas Atap • Drag konjungsi ke kotak kosong</p>
+<div id="playerBadge"></div>
+<br><button id="muteBtn">🔊 Suara ON</button>
+</header>
+
+<div class="hint">
+<b>Cara main:</b> ① Seret (drag) / ketuk konjungsi di bawah ② Jatuhkan / ketuk field <b>Konjungsi</b>. Kalimat majemuk muncul otomatis.
+<br>Ingat: sebelum <i>tetapi, melainkan, sedangkan, padahal, bahkan, lalu, kemudian</i> pakai <b>koma (,)</b>.
+<span class="warn">⚠️ Perhatian: sekali konjungsi diletakkan dalam kalimat, konjungsi tersebut tidak dapat diubah, jadi pilihlah dengan benar!</span>
+</div>
+
+<div class="bank">
+<h2>🎯 Bank Konjungsi (ketuk lalu ketuk kotak, atau seret):</h2>
+<div class="chips" id="bank"></div>
+</div>
+
+<div id="quiz"></div>
+
+<div class="actions">
+<button class="big" id="reset">🔄 Soal Baru (Acak)</button>
+<button class="big" id="showScore" disabled>🏆 Lihat Skor Saya</button>
+</div>
+
+<footer>Single file • Offline • Bisa dibuka di HP / laptop</footer>
+</div>
+
+<div class="overlay" id="gate">
+<div class="modal">
+<h2>👋 Halo, selamat datang!</h2>
+<p class="sub">Pilih karaktermu dan tulis namamu dulu sebelum mengerjakan.</p>
+<div class="chars" id="chars"></div>
+<input id="nameInput" maxlength="20" placeholder="Tulis namamu di sini..." autocomplete="off">
+<div id="gateErr"></div>
+<button id="startBtn">🚀 Mulai Mengerjakan</button>
+</div>
+</div>
+
+<div class="overlay hidden" id="resultWrap">
+<div class="modal">
+<h2 id="resTitle">🏆 Hasil Kamu</h2>
+<p class="sub" id="resName"></p>
+<div id="scoreBig"></div>
+<div id="reviewList"></div>
+<div class="modalRow">
+<button id="closeResult">Tutup</button>
+<button id="newQuiz">🔄 Soal Baru</button>
+</div>
+</div>
+</div>
+
+<script>
+const CONJ=["dan","serta","atau","tetapi","melainkan","sedangkan","padahal","bahkan","lalu","kemudian"];
+const NEED_COMMA=["tetapi","melainkan","sedangkan","padahal","bahkan","lalu","kemudian"];
+const WHY={dan:"menggabungkan dua kegiatan",serta:"menggabungkan dua kegiatan",atau:"memilih salah satu dari dua pilihan",tetapi:"mempertentangkan dua keadaan yang berlawanan",melainkan:"mempertentangkan sekaligus mengganti dengan pilihan yang benar",sedangkan:"membandingkan dua keadaan yang berbeda",padahal:"menunjukkan keadaan di luar dugaan",bahkan:"menguatkan sampai melebihi dugaan",lalu:"menunjukkan urutan kejadian",kemudian:"menunjukkan urutan kejadian"};
+const CHARS=[["🐱","Kucing"],["🐸","Katak"],["🐦","Burung"],["🐟","Ikan"],["🦋","Kupu"],["🐢","Kura"],["🐰","Kelinci"],["🦀","Kepiting"],["🐝","Lebah"]];
+const BANK=[
+{k1:"Ayah membersihkan pekarangan",k2:"Ibu memasak di dapur",a:"dan"},
+{k1:"Ibu menyapu teras",k2:"Ayah mengecat dinding",a:"dan"},
+{k1:"Kakak memegang tangga",k2:"Ayah naik ke atap",a:"dan"},
+{k1:"Adik mengumpulkan paku",k2:"Kakak menyiapkan palu",a:"dan"},
+{k1:"Kakak menyapu atap",k2:"Adik mengumpulkan daun kering",a:"serta"},
+{k1:"Ayah menambal atap yang bocor",k2:"Ayah mengecat ulang genteng",a:"serta"},
+{k1:"Ibu menyiram bunga",k2:"Ibu mengganti pot yang pecah",a:"serta"},
+{k1:"Kakak membersihkan talang air",k2:"Kakak menguras ember penampung hujan",a:"serta"},
+{k1:"Budi mau naik ke atap",k2:"Budi menunggu di bawah",a:"atau"},
+{k1:"Kita memperbaiki atap sendiri",k2:"Kita memanggil tukang",a:"atau"},
+{k1:"Adik mau menyapu teras",k2:"Kakak mau mengepel teras",a:"atau"},
+{k1:"Ayah mau menambal genteng retak",k2:"Ayah mau mengganti genteng retak",a:"atau"},
+{k1:"Genteng rumah sudah tua",k2:"Genteng rumah masih kuat menahan hujan",a:"tetapi"},
+{k1:"Hujan turun deras",k2:"Ayah tetap bekerja di atap",a:"tetapi"},
+{k1:"Tangga bambu sudah tua",k2:"Tangga bambu masih kokoh dipakai",a:"tetapi"},
+{k1:"Atap bocor tadi pagi",k2:"Atap sudah diperbaiki sore ini",a:"tetapi"},
+{k1:"Itu bukan suara hujan",k2:"Itu suara genteng yang lepas",a:"melainkan"},
+{k1:"Itu bukan mainan Adik",k2:"Itu tangga lipat milik Ayah",a:"melainkan"},
+{k1:"Budi tidak menonton TV",k2:"Budi membantu Ayah memegang tangga",a:"melainkan"},
+{k1:"Itu bukan sarang burung",k2:"Itu tumpukan daun kering",a:"melainkan"},
+{k1:"Ayah memperbaiki genteng",k2:"Ibu menjemur pakaian di teras",a:"sedangkan"},
+{k1:"Kakak mengaduk cat",k2:"Ayah mengoleskannya ke genteng",a:"sedangkan"},
+{k1:"Adik bermain di halaman",k2:"Kakak belajar di kamar",a:"sedangkan"},
+{k1:"Ayah bekerja di atas atap",k2:"Ibu menunggu di bawah",a:"sedangkan"},
+{k1:"Adik memakai payung",k2:"langit sangat cerah",a:"padahal"},
+{k1:"Budi memakai jas hujan",k2:"cuaca sangat cerah",a:"padahal"},
+{k1:"Jendela sudah ditutup rapat",k2:"angin masih masuk lewat celah",a:"padahal"},
+{k1:"Atap sudah diperbaiki kemarin",k2:"air masih menetes di dapur",a:"padahal"},
+{k1:"Atap sudah dibersihkan",k2:"Tukang mengecatnya ulang hingga tampak baru",a:"bahkan"},
+{k1:"Hujan turun deras",k2:"Angin kencang menyertai hujan",a:"bahkan"},
+{k1:"Ayah bekerja seharian",k2:"Ayah tidak tampak lelah sedikit pun",a:"bahkan"},
+{k1:"Semua genteng sudah diganti",k2:"Rangka kayu ikut diperkuat",a:"bahkan"},
+{k1:"Ayah menaiki tangga",k2:"Ayah mengganti genteng yang pecah",a:"lalu"},
+{k1:"Budi mengambil palu",k2:"Budi memaku genteng yang lepas",a:"lalu"},
+{k1:"Ibu menyapu debu atap",k2:"Ibu mengelapnya dengan kain basah",a:"lalu"},
+{k1:"Kakak menuang cat ke kaleng",k2:"Kakak mengaduknya hingga rata",a:"lalu"},
+{k1:"Ibu mencuci kain pel",k2:"Ibu mengepel lantai teras",a:"kemudian"},
+{k1:"Ayah menurunkan tangga",k2:"Ayah menyimpan perkakas ke gudang",a:"kemudian"},
+{k1:"Adik menyapu teras",k2:"Adik membuang daun kering ke tong sampah",a:"kemudian"},
+{k1:"Kakak menjemur kuas bekas cat",k2:"Kakak mencuci tangannya hingga bersih",a:"kemudian"},
+{k1:"Ibu menjemur pakaian",k2:"Ayah melipat tikar",a:"dan"},
+{k1:"Adik mengambil ember",k2:"Adik mengisi air bersih",a:"serta"},
+{k1:"Kakak mau mengecat genteng",k2:"Kakak mau menambal talang",a:"atau"},
+{k1:"Cat genteng sudah pudar",k2:"Cat genteng tidak mengelupas",a:"tetapi"},
+{k1:"Itu bukan ember cat",k2:"Itu ember air bersih",a:"melainkan"},
+{k1:"Ibu memasak di dapur",k2:"Ayah memperbaiki atap",a:"sedangkan"},
+{k1:"Genteng baru sudah dipasang",k2:"Bocor muncul di tempat lain",a:"padahal"},
+{k1:"Tangga sudah diamankan",k2:"Tali pengaman ikut dipasang",a:"bahkan"},
+{k1:"Ayah membersihkan sikat",k2:"Ayah menyimpan cat sisa",a:"lalu"},
+{k1:"Budi melipat tangga",k2:"Budi menyapu sisa cat",a:"kemudian"}
+];
+const bank=document.getElementById("bank"),quiz=document.getElementById("quiz");
+const showScoreBtn=document.getElementById("showScore");
+let selected=null,current=[],placed={},player={name:"",char:""};
+let ghost=null,dragging=false,sx=0,sy=0;
+const SUBJ=["ayah","ibu","kakak","adik","budi","kita","aku","saya","kami","dia","mereka"];
+// ponytail: K2 utuh dikecilkan huruf awalnya saat digabung, kecuali nama/subyek orang
+function adjustK2(k1,k2,val){
+let s=k2.trim();
+if(val==="melainkan")s=s.replace(/^(Itu|Ini)\s+/,"");
+const w1=k1.trim().split(/\s+/)[0].toLowerCase();
+let words=s.split(/\s+/);
+if(words.length>1&&words[0].toLowerCase()===w1&&SUBJ.includes(words[0].toLowerCase()))words=words.slice(1);
+s=words.join(" ");
+if(!SUBJ.includes(s.split(/\s+/)[0].toLowerCase()))s=s.charAt(0).toLowerCase()+s.slice(1);
+return s;
+}
+function combine(d,val){return d.k1+(NEED_COMMA.includes(val)?", ":" ")+val+" "+adjustK2(d.k1,d.k2,val)+(val==="atau"?"?":".");}
+function fullSentence(d){return combine(d,d.a);}
+function shuffled10(){const c=[...BANK];for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c.slice(0,10);}
+function buildBank(){
+bank.innerHTML="";
+CONJ.forEach(w=>{
+const c=document.createElement("button");
+c.className="chip";c.textContent=w;c.draggable=true;
+c.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",w);selected=w;});
+c.addEventListener("click",()=>{
+sfx.tap();
+document.querySelectorAll("#bank .chip").forEach(x=>x.classList.remove("selected"));
+if(selected===w){selected=null;return;}
+selected=w;c.classList.add("selected");
+});
+// ponytail: drag sentuh (Pointer Events); mouse tetap pakai HTML5 DnD, ketuk-ketuk tetap jalan
+c.addEventListener("pointerdown",e=>{
+if(e.pointerType==="mouse"||ghost)return;
+dragging=false;sx=e.clientX;sy=e.clientY;
+const move=ev=>{
+if(!dragging&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<9)return;
+if(!dragging){dragging=true;ghost=c.cloneNode(true);ghost.classList.add("drag-ghost");ghost.classList.remove("selected");ghost.style.background=getComputedStyle(c).backgroundColor;document.body.appendChild(ghost);}
+ghost.style.left=ev.clientX+"px";ghost.style.top=ev.clientY+"px";
+document.querySelectorAll(".drop.hover").forEach(z=>z.classList.remove("hover"));
+const el=document.elementFromPoint(ev.clientX,ev.clientY);
+const z=el&&el.closest?el.closest(".drop"):null;
+if(z&&!z.dataset.val)z.classList.add("hover");
+};
+const up=ev=>{
+window.removeEventListener("pointermove",move);
+window.removeEventListener("pointerup",up);
+window.removeEventListener("pointercancel",up);
+if(ghost){ghost.remove();ghost=null;}
+if(!dragging)return;
+dragging=false;
+document.querySelectorAll(".drop.hover").forEach(z=>z.classList.remove("hover"));
+const el=document.elementFromPoint(ev.clientX,ev.clientY);
+const z=el&&el.closest?el.closest(".drop"):null;
+if(z)place(z,w);
+};
+window.addEventListener("pointermove",move);
+window.addEventListener("pointerup",up);
+window.addEventListener("pointercancel",up);
+});
+bank.appendChild(c);
+});
+}
+function buildQuiz(){
+placed={};current=shuffled10();quiz.innerHTML="";
+current.forEach((d,i)=>{
+const card=document.createElement("div");
+card.className="card";
+card.innerHTML=`<div class="qnum">Soal ${i+1}</div><div class="step"><span class="snum s1">1</span><div class="sbody"><div class="stitle">Baca dua kalimat ini:</div><div class="sent">① ${d.k1}.</div><div class="sent">② ${d.k2}.</div></div></div><div class="step"><span class="snum s2">2</span><div class="sbody"><div class="stitle">Taruh satu konjungsi ke sini:</div><span class="drop" data-i="${i}">[ ... ]</span></div></div><div class="step"><span class="snum s3">3</span><div class="sbody"><div class="stitle">Hasil gabungannya:</div><span class="out wait" id="out${i}">Hasilnya akan muncul di sini ✨</span></div></div>`;
+card.style.animationDelay=(i*0.05)+"s";
+quiz.appendChild(card);
+});
+document.querySelectorAll(".drop").forEach(z=>{
+z.addEventListener("dragover",e=>{if(!z.dataset.val){e.preventDefault();z.classList.add("hover");}});
+z.addEventListener("dragleave",()=>z.classList.remove("hover"));
+z.addEventListener("drop",e=>{e.preventDefault();z.classList.remove("hover");place(z,e.dataTransfer.getData("text/plain"));});
+z.addEventListener("click",()=>{if(selected)place(z,selected);});
+});
+updateScoreBtn();
+}
+function place(zone,val){
+if(!val||zone.dataset.val)return;
+zone.dataset.val=val;zone.classList.add("filled");
+zone.innerHTML=`<span class="chip">${val}</span>`;
+const i=zone.dataset.i,d=current[+i];
+placed[i]=val;
+const out=document.getElementById("out"+i);
+if(out){out.textContent=combine(d,val);out.classList.remove("wait");out.classList.add("done");}
+selected=null;
+document.querySelectorAll("#bank .chip").forEach(x=>x.classList.remove("selected"));
+sfx.drop();
+updateScoreBtn();
+}
+function updateScoreBtn(){
+const n=Object.keys(placed).length;
+showScoreBtn.disabled=n<10;
+showScoreBtn.textContent=n<10?`🏆 Isi semua soal (${n}/10)`:"🏆 Lihat Skor Saya";
+}
+// gate
+const charsEl=document.getElementById("chars");
+let pickedChar="";
+CHARS.forEach(([e,nm])=>{
+const b=document.createElement("button");
+b.className="charBtn";b.innerHTML=`${e}<small>${nm}</small>`;
+b.onclick=()=>{document.querySelectorAll(".charBtn").forEach(x=>x.classList.remove("picked"));b.classList.add("picked");pickedChar=e;document.getElementById("gateErr").textContent="";};
+charsEl.appendChild(b);
+});
+document.getElementById("startBtn").onclick=()=>{
+const nm=document.getElementById("nameInput").value.trim();
+const err=document.getElementById("gateErr");
+if(!pickedChar){err.textContent="Pilih karakter dulu ya!";return;}
+if(!nm){err.textContent="Tulis namamu dulu ya!";return;}
+player={name:nm,char:pickedChar};
+const badge=document.getElementById("playerBadge");
+badge.style.display="inline-block";badge.textContent=`${player.char} ${player.name}`;
+document.getElementById("gate").classList.add("hidden");
+sfx.start();
+};
+// result
+showScoreBtn.onclick=()=>{
+let benar=0;const wrong=[];
+current.forEach((d,i)=>{
+const v=placed[i];
+if(v===d.a)benar++;
+else wrong.push({d,i,got:v||"(kosong)"});
+});
+const skor=benar*10;
+document.getElementById("resName").textContent=`${player.char} ${player.name} — ${benar} benar dari 10 soal`;
+const sb=document.getElementById("scoreBig");
+if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){sb.textContent=skor;}
+else{const t0=performance.now();(function tick(t){const p=Math.min(1,(t-t0)/600);sb.textContent=Math.round(skor*p);if(p<1)requestAnimationFrame(tick);})(t0);}
+if(benar===10)sfx.win();else if(benar>=7)sfx.good();else sfx.tryAgain();
+const list=document.getElementById("reviewList");
+list.innerHTML="";
+document.getElementById("resTitle").textContent=benar===10?"🎉 Sempurna!":"🏆 Hasil Kamu";
+if(!wrong.length){
+list.innerHTML=`<div class="revbox good"><div class="rl">🌟 Semua Benar!</div><div>Semua jawaban benar. Hebat, ${player.name}!</div></div>`;
+}else{
+const h=document.createElement("div");
+h.style.cssText="font-weight:800;font-size:.9rem;color:#b91c1c";
+h.textContent=`Perlu diperbaiki (${wrong.length} soal):`;
+list.appendChild(h);
+wrong.forEach(({d,i,got})=>{
+const el=document.createElement("div");
+el.className="revItem";
+el.innerHTML=`<div class="qnum">Soal ${i+1}</div><div class="revbox bad"><div class="rl">❌ Kalimatmu:</div><div>${combine(d,got)}</div></div><div class="revbox good"><div class="rl">✅ Yang benar:</div><div>${fullSentence(d)}</div></div><div class="why">💡 Kenapa “${d.a}”? Karena konjungsi ini untuk ${WHY[d.a]}.</div>`;
+list.appendChild(el);
+});
+}
+document.getElementById("resultWrap").classList.remove("hidden");
+};
+document.getElementById("closeResult").onclick=()=>document.getElementById("resultWrap").classList.add("hidden");
+const newRound=()=>{document.getElementById("resultWrap").classList.add("hidden");buildQuiz();window.scrollTo({top:0,behavior:"smooth"});};
+document.getElementById("newQuiz").onclick=newRound;
+document.getElementById("reset").onclick=newRound;
+// ponytail: suara Web Audio tanpa file, hanya bunyi setelah sentuhan murid
+let audioCtx=null,muted=false;
+try{muted=localStorage.getItem("suaraLatihan")==="off";}catch(e){}
+function tone(f,t0,dur,type,vol){
+if(muted)return;
+try{
+audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+if(audioCtx.state==="suspended")audioCtx.resume();
+const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.type=type||"sine";o.frequency.value=f;
+const t=audioCtx.currentTime+t0;
+g.gain.setValueAtTime(0.0001,t);
+g.gain.exponentialRampToValueAtTime(vol||0.15,t+0.02);
+g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+o.connect(g);g.connect(audioCtx.destination);
+o.start(t);o.stop(t+dur+0.05);
+}catch(e){}
+}
+const sfx={
+tap(){tone(660,0,0.12);},
+drop(){tone(520,0,0.1);tone(780,0.09,0.14);},
+start(){tone(523,0,0.12);tone(659,0.1,0.12);tone(784,0.2,0.2);},
+win(){[523,659,784,1047].forEach((f,i)=>tone(f,i*0.12,0.22));},
+good(){[523,659,784].forEach((f,i)=>tone(f,i*0.1,0.18));},
+tryAgain(){tone(392,0,0.2,"triangle");tone(330,0.18,0.3,"triangle");}
+};
+const muteBtn=document.getElementById("muteBtn");
+function paintMute(){muteBtn.textContent=muted?"🔇 Suara OFF":"🔊 Suara ON";}
+muteBtn.onclick=()=>{muted=!muted;try{localStorage.setItem("suaraLatihan",muted?"off":"on");}catch(e){}paintMute();if(!muted)sfx.tap();};
+paintMute();
+buildBank();buildQuiz();
+</script>
+</body>
+</html>
