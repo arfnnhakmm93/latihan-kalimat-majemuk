@@ -32,12 +32,13 @@ header p{font-size:.9rem;color:#8a8496;margin-top:6px}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(125,185,247,0)}50%{box-shadow:0 0 0 4px rgba(125,185,247,.45)}}
 .drop:not(.filled){animation:pulse 2s infinite}
 .chip{transition:transform .15s}
-button.big,.charBtn,#startBtn,#muteBtn{transition:transform .1s}
-button.big:active,.charBtn:active,#startBtn:active,#muteBtn:active{transform:scale(.96)}
+button.big,.charBtn,#startBtn,#muteBtn,#themeBtn{transition:transform .1s}
+button.big:active,.charBtn:active,#startBtn:active,#muteBtn:active,#themeBtn:active{transform:scale(.96)}
 .modal{animation:pop .25s ease}
 @keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-#muteBtn{background:#efe8fa;color:#4a4458;border:none;border-radius:999px;padding:8px 18px;min-height:44px;font-weight:800;cursor:pointer;font-size:.9rem;margin-top:10px}
+#muteBtn,#themeBtn{background:#efe8fa;color:#4a4458;border:none;border-radius:999px;padding:8px 18px;min-height:44px;font-weight:800;cursor:pointer;font-size:.9rem;margin-top:10px}
+#themeBtn{margin-left:8px}
 .card{background:#ffffff;border:2px solid #efe6fb;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 3px 12px rgba(120,90,160,.18);border-left:6px solid #f9a8c9;max-width:100%}
 #quiz .card:nth-child(5n+1){border-color:#f9a8c9}
 #quiz .card:nth-child(5n+2){border-color:#f6c453}
@@ -59,16 +60,19 @@ button.big:active,.charBtn:active,#startBtn:active,#muteBtn:active{transform:sca
 .out.wait{color:#a49db5;font-style:italic;font-weight:600}
 .drop{min-width:130px;min-height:44px;border:2px dashed #a8cdea;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;padding:4px 12px;font-weight:800;color:#3d6a9e;background:#eef6ff;cursor:pointer;vertical-align:middle}
 .drop.filled{border-style:solid;border-color:#5ecf8f;background:#d9f4e3;cursor:not-allowed}
+.droptip{font-size:.78rem;color:#8a7fa8;font-style:italic;margin-left:8px;white-space:nowrap}
+.drop.filled+.droptip{display:none}
 .drop.hover{border-color:#7db9f7;background:#d6e9ff;transform:scale(1.03)}
 .drop .chip{pointer-events:none;margin:0;background:transparent;box-shadow:none;padding:0;min-height:0}
 .actions{display:flex;gap:10px;margin:16px 0}
 button.big{flex:1;border:none;border-radius:14px;padding:14px;min-height:48px;font-size:1rem;font-weight:800;cursor:pointer}
-#reset{background:#ddd2f7;color:#4a4458}
+#reset{background:#e14b62;color:#fff}
 #showScore{background:#8fe3b3;color:#234d33}
 #showScore:disabled{background:#e9e2f2;color:#a09aad;cursor:not-allowed}
 footer{text-align:center;font-size:.8rem;color:#a49db5;padding:12px}
 .overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
 .overlay.hidden{display:none}
+html.locked,body.locked{overflow:hidden}
 .modal{background:#fffaf0;border-radius:20px;padding:24px 20px;max-width:480px;width:100%;max-height:90vh;overflow:auto;text-align:center;box-shadow:0 10px 40px rgba(120,90,160,.3);border:3px solid #f3e8ff}
 .modal h2{color:#7c5cbf;margin-bottom:6px}
 .modal p.sub{font-size:.88rem;color:#8a8496;margin-bottom:14px}
@@ -94,6 +98,8 @@ footer{text-align:center;font-size:.8rem;color:#a49db5;padding:12px}
 .modalRow button{flex:1;border:none;border-radius:12px;padding:12px;min-height:48px;font-weight:800;cursor:pointer;font-size:.95rem}
 #closeResult{background:#efe8fa;color:#4a4458}
 #newQuiz{background:#f9a8c9;color:#5b2140}
+#waBtn{display:none;background:#25d366;color:#fff;text-decoration:none;align-items:center;justify-content:center;font-weight:800;border-radius:12px;padding:12px;min-height:48px;font-size:.95rem;flex:1}
+.modalRow button.danger{background:#e14b62;color:#fff}
 @media (max-width:640px){.bank{top:4px;padding:10px 12px}.bank h2{font-size:.9rem;margin-bottom:8px}.card{scroll-margin-top:290px}}
 @media (max-width:480px){
 body{padding:12px}
@@ -105,6 +111,65 @@ header h1{font-size:1.15rem}
 .modal{padding:20px 14px}
 .charBtn{font-size:1.7rem;min-height:60px}
 }
+/* ponytail: override manual per-elemen; tambahkan aturan bila ada elemen berwarna baru */
+body.dark{background:linear-gradient(160deg,#1a1622 0%,#141b1a 38%,#131a26 70%,#1c1522 100%);color:#e6e1f0}
+body.dark header{background:#211c2e;border-top-color:#a86f9b;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+body.dark header h1{color:#d6c2ff}
+body.dark header p{color:#a99fc0}
+body.dark #playerBadge{background:#332a4d;color:#d6c2ff}
+body.dark .hint{background:#2a2620;border-color:#c29222;color:#e6d9b8}
+body.dark .hint .warn{background:#3a1f28;color:#ff9bb0}
+body.dark .bank{background:#211c2e;border-color:#3a2f55;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+body.dark .bank h2{color:#c4a8ff}
+body.dark .chip{background:#2e2742;color:#e6e1f0;box-shadow:0 2px 4px rgba(0,0,0,.4)}
+body.dark .chips .chip:nth-child(5n+1){background:#4a2a38}
+body.dark .chips .chip:nth-child(5n+2){background:#4a3a20}
+body.dark .chips .chip:nth-child(5n+3){background:#1f4433}
+body.dark .chips .chip:nth-child(5n+4){background:#20384f}
+body.dark .chips .chip:nth-child(5n+5){background:#332a4d}
+body.dark .card{background:#211c2e;border-color:#3a2f55;border-left-color:#a86f9b;box-shadow:0 3px 12px rgba(0,0,0,.45)}
+body.dark #quiz .card:nth-child(5n+1){border-color:#a86f9b}
+body.dark #quiz .card:nth-child(5n+2){border-color:#c99a3a}
+body.dark #quiz .card:nth-child(5n+3){border-color:#3f9e6b}
+body.dark #quiz .card:nth-child(5n+4){border-color:#4a86c9}
+body.dark #quiz .card:nth-child(5n+5){border-color:#8a6fd0}
+body.dark .qnum{background:#332a4d;color:#c4a8ff}
+body.dark .step+.step{border-top-color:#3a2f55}
+body.dark .s1{background:#4a2a38;color:#ffc9d6}
+body.dark .s2{background:#20384f;color:#bcd8ff}
+body.dark .s3{background:#1f4433;color:#b6f0d0}
+body.dark .stitle{color:#c4a8ff}
+body.dark .sent{background:#2a2438;color:#e6e1f0}
+body.dark .out.done{color:#6fe0a0}
+body.dark .out.wait{color:#8a82a0}
+body.dark .drop{background:#1f2b3a;border-color:#4a6b8f;color:#a8cdea}
+body.dark .drop.filled{background:#1e3a2b;border-color:#4cc98a}
+body.dark .drop.hover{background:#24374d;border-color:#7db9f7}
+body.dark .droptip{color:#8a82a0}
+body.dark #showScore{background:#2f6b48;color:#d9f7e6}
+body.dark #showScore:disabled{background:#2a2635;color:#6b6578}
+body.dark footer{color:#8a82a0}
+body.dark .overlay{background:rgba(0,0,0,.7)}
+body.dark .modal{background:#241e33;border-color:#3a2f55;box-shadow:0 10px 40px rgba(0,0,0,.55)}
+body.dark .modal h2{color:#c4a8ff}
+body.dark .modal p.sub{color:#a99fc0}
+body.dark .charBtn{background:#2a2438;border-color:#3a2f55}
+body.dark .charBtn small{color:#a99fc0}
+body.dark .charBtn.picked{background:#3a2f55;border-color:#b79ced}
+body.dark #nameInput{background:#2a2438;border-color:#4a3f6b;color:#e6e1f0}
+body.dark #nameInput:focus{border-color:#b79ced;box-shadow:0 0 0 3px #3a2f55}
+body.dark #gateErr{color:#ff9bb0}
+body.dark #startBtn{background:#7a5fc0;color:#fff}
+body.dark #scoreBig{color:#4cc98a}
+body.dark .revbox.bad{background:#3a2028;border-color:#f27d92;color:#f4c9d0}
+body.dark .revbox.good{background:#1e3a2b;border-color:#4cc98a;color:#c9f0d8}
+body.dark .revbox.bad .rl{color:#ff9bb0}
+body.dark .revbox.good .rl{color:#6fe0a0}
+body.dark .why{background:#2a2620;color:#e6d9b8}
+body.dark #closeResult{background:#332a4d;color:#e6e1f0}
+body.dark #askNo{background:#332a4d;color:#e6e1f0}
+body.dark #newQuiz{background:#7a4560;color:#ffd9e3}
+body.dark #muteBtn,body.dark #themeBtn{background:#332a4d;color:#e6e1f0}
 </style>
 </head>
 <body>
@@ -114,6 +179,7 @@ header h1{font-size:1.15rem}
 <p>Bahasa Indonesia Kelas 4 • BAB 2 Di Atas Atap • Drag konjungsi ke kotak kosong</p>
 <div id="playerBadge"></div>
 <br><button id="muteBtn">🔊 Suara ON</button>
+<button id="themeBtn">🌙 Tema Gelap</button>
 </header>
 
 <div class="hint">
@@ -140,9 +206,35 @@ header h1{font-size:1.15rem}
 <div class="overlay" id="gate">
 <div class="modal">
 <h2>👋 Halo, selamat datang!</h2>
-<p class="sub">Pilih karaktermu dan tulis namamu dulu sebelum mengerjakan.</p>
+<p class="sub">Pilih karaktermu dan namamu dulu sebelum mengerjakan.</p>
 <div class="chars" id="chars"></div>
-<input id="nameInput" maxlength="20" placeholder="Tulis namamu di sini..." autocomplete="off">
+<select id="nameInput">
+<option value="">— Pilih namamu —</option>
+<option>Abdulah</option>
+<option>Anggita Febbyolla Shalza Billa</option>
+<option>Arkan Said Ramadan</option>
+<option>Bilhan</option>
+<option>Fitri Akila Putri</option>
+<option>Hizam Al Hanafi</option>
+<option>Kamiswar Putri</option>
+<option>Khaliqa Dzahin</option>
+<option>La Bintang Nur Abdullah</option>
+<option>Mohamad Alfianur Kurniawan</option>
+<option>Muhamad Syah Putra Ariansyah</option>
+<option>Muhammad Arlan</option>
+<option>Muhammad Khalif Pratama</option>
+<option>Muhammad Ozan Al-Farizqi Hermawan</option>
+<option>Muhammad Putra Umagap</option>
+<option>Muhammad Rahman Solo</option>
+<option>Muhammad Rizki Ansyar Cando</option>
+<option>Reni Safitri</option>
+<option>Saka Zulfiandi Ramadhan</option>
+<option>Salsabila Cando</option>
+<option>Shela Fasilah</option>
+<option>Tiuna Azzhra</option>
+<option>Ulfah Ramadhani</option>
+<option>Zakir Ramadan</option>
+</select>
 <div id="gateErr"></div>
 <button id="startBtn">🚀 Mulai Mengerjakan</button>
 </div>
@@ -157,6 +249,18 @@ header h1{font-size:1.15rem}
 <div class="modalRow">
 <button id="closeResult">Tutup</button>
 <button id="newQuiz">🔄 Soal Baru</button>
+<a id="waBtn" class="wa" target="_blank" rel="noopener">📤 Kirim Hasil ke WA</a>
+</div>
+</div>
+</div>
+
+<div class="overlay hidden" id="askWrap">
+<div class="modal">
+<h2>⚠️ Acak Soal Baru?</h2>
+<p class="sub">Soal akan diganti dan jawaban yang sudah kamu isi akan hilang.</p>
+<div class="modalRow">
+<button id="askNo">Batal</button>
+<button id="askYes" class="danger">Ya, Acak</button>
 </div>
 </div>
 </div>
@@ -236,10 +340,15 @@ return s;
 }
 function combine(d,val){return d.k1+(NEED_COMMA.includes(val)?", ":" ")+val+" "+adjustK2(d.k1,d.k2,val)+(val==="atau"?"?":".");}
 function fullSentence(d){return combine(d,d.a);}
+function waMessage(benar,wrong,skor){
+const salah=wrong.map(({d,i,got})=>`• Soal ${i+1}: "${got==="(kosong)"?"(tidak dijawab)":combine(d,got)}" → seharusnya konjungsi "${d.a}"`).join("\n");
+return `Hasil Latihan Kalimat Majemuk Setara\nNama: ${player.char} ${player.name}\nSkor: ${skor}/100 (${benar}/10 benar)\nTanggal: ${new Date().toLocaleDateString("id-ID")}\n\n${wrong.length?"Jawaban salah ("+wrong.length+"):\n"+salah:"Semua jawaban benar 🎉"}`;
+}
 function shuffled10(){const c=[...BANK];for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c.slice(0,10);}
 function buildBank(){
 bank.innerHTML="";
-CONJ.forEach(w=>{
+const order=[...CONJ];for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+order.forEach(w=>{
 const c=document.createElement("button");
 c.className="chip";c.textContent=w;c.draggable=true;
 c.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",w);selected=w;});
@@ -286,7 +395,7 @@ placed={};current=shuffled10();quiz.innerHTML="";
 current.forEach((d,i)=>{
 const card=document.createElement("div");
 card.className="card";
-card.innerHTML=`<div class="qnum">Soal ${i+1}</div><div class="step"><span class="snum s1">1</span><div class="sbody"><div class="stitle">Baca dua kalimat ini:</div><div class="sent">① ${d.k1}.</div><div class="sent">② ${d.k2}.</div></div></div><div class="step"><span class="snum s2">2</span><div class="sbody"><div class="stitle">Taruh satu konjungsi ke sini:</div><span class="drop" data-i="${i}">[ ... ]</span></div></div><div class="step"><span class="snum s3">3</span><div class="sbody"><div class="stitle">Hasil gabungannya:</div><span class="out wait" id="out${i}">Hasilnya akan muncul di sini ✨</span></div></div>`;
+card.innerHTML=`<div class="qnum">Soal ${i+1}</div><div class="step"><span class="snum s1">1</span><div class="sbody"><div class="stitle">Baca dua kalimat ini:</div><div class="sent">① ${d.k1}.</div><div class="sent">② ${d.k2}.</div></div></div><div class="step"><span class="snum s2">2</span><div class="sbody"><div class="stitle">Taruh satu konjungsi ke sini:</div><span class="drop" data-i="${i}">[ ... ]</span><span class="droptip">← Seret konjungsi ke sini</span></div></div><div class="step"><span class="snum s3">3</span><div class="sbody"><div class="stitle">Hasil gabungannya:</div><span class="out wait" id="out${i}">Hasilnya akan muncul di sini ✨</span></div></div>`;
 card.style.animationDelay=(i*0.05)+"s";
 quiz.appendChild(card);
 });
@@ -316,6 +425,10 @@ const n=Object.keys(placed).length;
 showScoreBtn.disabled=n<10;
 showScoreBtn.textContent=n<10?`🏆 Isi semua soal (${n}/10)`:"🏆 Lihat Skor Saya";
 }
+// ponytail: kunci scroll latar saat popup terbuka (isi modal tetap bisa scroll)
+function lockScroll(){document.documentElement.classList.add("locked");document.body.classList.add("locked");}
+function unlockScroll(){document.documentElement.classList.remove("locked");document.body.classList.remove("locked");}
+lockScroll();
 // gate
 const charsEl=document.getElementById("chars");
 let pickedChar="";
@@ -325,19 +438,22 @@ b.className="charBtn";b.innerHTML=`${e}<small>${nm}</small>`;
 b.onclick=()=>{document.querySelectorAll(".charBtn").forEach(x=>x.classList.remove("picked"));b.classList.add("picked");pickedChar=e;document.getElementById("gateErr").textContent="";};
 charsEl.appendChild(b);
 });
+document.getElementById("nameInput").addEventListener("change",()=>{document.getElementById("gateErr").textContent="";});
 document.getElementById("startBtn").onclick=()=>{
-const nm=document.getElementById("nameInput").value.trim();
+const nm=document.getElementById("nameInput").value;
 const err=document.getElementById("gateErr");
 if(!pickedChar){err.textContent="Pilih karakter dulu ya!";return;}
-if(!nm){err.textContent="Tulis namamu dulu ya!";return;}
+if(!nm){err.textContent="Pilih namamu dulu ya!";return;}
 player={name:nm,char:pickedChar};
 const badge=document.getElementById("playerBadge");
 badge.style.display="inline-block";badge.textContent=`${player.char} ${player.name}`;
 document.getElementById("gate").classList.add("hidden");
+unlockScroll();
 sfx.start();
 };
 // result
 showScoreBtn.onclick=()=>{
+lockScroll();
 let benar=0;const wrong=[];
 current.forEach((d,i)=>{
 const v=placed[i];
@@ -367,12 +483,18 @@ el.innerHTML=`<div class="qnum">Soal ${i+1}</div><div class="revbox bad"><div cl
 list.appendChild(el);
 });
 }
+const wa=document.getElementById("waBtn");
+wa.href=`https://wa.me/6282250903536?text=${encodeURIComponent(waMessage(benar,wrong,skor))}`;
+wa.style.display="flex";
 document.getElementById("resultWrap").classList.remove("hidden");
 };
-document.getElementById("closeResult").onclick=()=>document.getElementById("resultWrap").classList.add("hidden");
-const newRound=()=>{document.getElementById("resultWrap").classList.add("hidden");buildQuiz();window.scrollTo({top:0,behavior:"smooth"});};
+document.getElementById("closeResult").onclick=()=>{document.getElementById("resultWrap").classList.add("hidden");unlockScroll();};
+const newRound=()=>{document.getElementById("resultWrap").classList.add("hidden");unlockScroll();buildQuiz();window.scrollTo({top:0,behavior:"smooth"});};
 document.getElementById("newQuiz").onclick=newRound;
-document.getElementById("reset").onclick=newRound;
+const askWrap=document.getElementById("askWrap");
+document.getElementById("reset").onclick=()=>{askWrap.classList.remove("hidden");lockScroll();};
+document.getElementById("askNo").onclick=()=>{askWrap.classList.add("hidden");unlockScroll();};
+document.getElementById("askYes").onclick=()=>{askWrap.classList.add("hidden");newRound();};
 // ponytail: suara Web Audio tanpa file, hanya bunyi setelah sentuhan murid
 let audioCtx=null,muted=false;
 try{muted=localStorage.getItem("suaraLatihan")==="off";}catch(e){}
@@ -403,6 +525,12 @@ const muteBtn=document.getElementById("muteBtn");
 function paintMute(){muteBtn.textContent=muted?"🔇 Suara OFF":"🔊 Suara ON";}
 muteBtn.onclick=()=>{muted=!muted;try{localStorage.setItem("suaraLatihan",muted?"off":"on");}catch(e){}paintMute();if(!muted)sfx.tap();};
 paintMute();
+const themeBtn=document.getElementById("themeBtn");
+let dark=false;
+try{dark=localStorage.getItem("temaLatihan")==="dark";}catch(e){}
+function paintTheme(){document.body.classList.toggle("dark",dark);themeBtn.textContent=dark?"☀️ Tema Terang":"🌙 Tema Gelap";}
+themeBtn.onclick=()=>{dark=!dark;try{localStorage.setItem("temaLatihan",dark?"dark":"light");}catch(e){}paintTheme();sfx.tap();};
+paintTheme();
 buildBank();buildQuiz();
 </script>
 </body>
