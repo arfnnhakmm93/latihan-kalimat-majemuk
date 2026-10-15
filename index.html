@@ -271,30 +271,30 @@ const NEED_COMMA=["tetapi","melainkan","sedangkan","padahal","bahkan","lalu","ke
 const WHY={dan:"menggabungkan dua kegiatan",serta:"menggabungkan dua kegiatan",atau:"memilih salah satu dari dua pilihan",tetapi:"mempertentangkan dua keadaan yang berlawanan",melainkan:"mempertentangkan sekaligus mengganti dengan pilihan yang benar",sedangkan:"membandingkan dua keadaan yang berbeda",padahal:"menunjukkan keadaan di luar dugaan",bahkan:"menguatkan sampai melebihi dugaan",lalu:"menunjukkan urutan kejadian",kemudian:"menunjukkan urutan kejadian"};
 const CHARS=[["🐱","Kucing"],["🐸","Katak"],["🐦","Burung"],["🐟","Ikan"],["🦋","Kupu"],["🐢","Kura"],["🐰","Kelinci"],["🦀","Kepiting"],["🐝","Lebah"]];
 const BANK=[
-{k1:"Ayah membersihkan pekarangan",k2:"Ibu memasak di dapur",a:"dan"},
-{k1:"Ibu menyapu teras",k2:"Ayah mengecat dinding",a:"dan"},
-{k1:"Kakak memegang tangga",k2:"Ayah naik ke atap",a:"dan"},
-{k1:"Adik mengumpulkan paku",k2:"Kakak menyiapkan palu",a:"dan"},
-{k1:"Kakak menyapu atap",k2:"Adik mengumpulkan daun kering",a:"serta"},
-{k1:"Ayah menambal atap yang bocor",k2:"Ayah mengecat ulang genteng",a:"serta"},
-{k1:"Ibu menyiram bunga",k2:"Ibu mengganti pot yang pecah",a:"serta"},
-{k1:"Kakak membersihkan talang air",k2:"Kakak menguras ember penampung hujan",a:"serta"},
+{k1:"Ayah membersihkan pekarangan",k2:"Ibu memasak di dapur",a:"dan",alt:["serta"]},
+{k1:"Ibu menyapu teras",k2:"Ayah mengecat dinding",a:"dan",alt:["serta"]},
+{k1:"Kakak memegang tangga",k2:"Ayah naik ke atap",a:"dan",alt:["serta"]},
+{k1:"Adik mengumpulkan paku",k2:"Kakak menyiapkan palu",a:"dan",alt:["serta"]},
+{k1:"Kakak menyapu atap",k2:"Kakak membersihkan talang air",a:"serta",alt:["dan"]},
+{k1:"Ayah menambal atap yang bocor",k2:"Ayah mengecat ulang genteng",a:"serta",alt:["dan"]},
+{k1:"Ibu menyiram bunga",k2:"Ibu mengganti pot yang pecah",a:"serta",alt:["dan"]},
+{k1:"Kakak membersihkan talang air",k2:"Kakak menguras ember penampung hujan",a:"serta",alt:["dan"]},
 {k1:"Budi mau naik ke atap",k2:"Budi menunggu di bawah",a:"atau"},
 {k1:"Kita memperbaiki atap sendiri",k2:"Kita memanggil tukang",a:"atau"},
 {k1:"Adik mau menyapu teras",k2:"Kakak mau mengepel teras",a:"atau"},
 {k1:"Ayah mau menambal genteng retak",k2:"Ayah mau mengganti genteng retak",a:"atau"},
-{k1:"Genteng rumah sudah tua",k2:"Genteng rumah masih kuat menahan hujan",a:"tetapi"},
-{k1:"Hujan turun deras",k2:"Ayah tetap bekerja di atap",a:"tetapi"},
-{k1:"Tangga bambu sudah tua",k2:"Tangga bambu masih kokoh dipakai",a:"tetapi"},
-{k1:"Atap bocor tadi pagi",k2:"Atap sudah diperbaiki sore ini",a:"tetapi"},
+{k1:"Genteng rumah sudah tua",k2:"Genteng rumah masih kuat menahan hujan",a:"tetapi",alt:["padahal"]},
+{k1:"Hujan turun deras",k2:"Ayah tetap bekerja di atap",a:"tetapi",alt:["padahal"]},
+{k1:"Tangga bambu sudah tua",k2:"Tangga bambu masih kokoh dipakai",a:"tetapi",alt:["padahal"]},
+{k1:"Atap bocor tadi pagi",k2:"Atap sudah diperbaiki sore ini",a:"tetapi",alt:["padahal"]},
 {k1:"Itu bukan suara hujan",k2:"Itu suara genteng yang lepas",a:"melainkan"},
 {k1:"Itu bukan mainan Adik",k2:"Itu tangga lipat milik Ayah",a:"melainkan"},
 {k1:"Budi tidak menonton TV",k2:"Budi membantu Ayah memegang tangga",a:"melainkan"},
 {k1:"Itu bukan sarang burung",k2:"Itu tumpukan daun kering",a:"melainkan"},
-{k1:"Ayah memperbaiki genteng",k2:"Ibu menjemur pakaian di teras",a:"sedangkan"},
-{k1:"Kakak mengaduk cat",k2:"Ayah mengoleskannya ke genteng",a:"sedangkan"},
-{k1:"Adik bermain di halaman",k2:"Kakak belajar di kamar",a:"sedangkan"},
-{k1:"Ayah bekerja di atas atap",k2:"Ibu menunggu di bawah",a:"sedangkan"},
+{k1:"Ayah memperbaiki genteng",k2:"Ibu menjemur pakaian di teras",a:"sedangkan",alt:["tetapi"]},
+{k1:"Kakak mengaduk cat di ember",k2:"Adik bermain bola di halaman",a:"sedangkan",alt:["tetapi"]},
+{k1:"Adik bermain di halaman",k2:"Kakak belajar di kamar",a:"sedangkan",alt:["tetapi"]},
+{k1:"Ayah bekerja di atas atap",k2:"Ibu menunggu di bawah",a:"sedangkan",alt:["tetapi"]},
 {k1:"Adik memakai payung",k2:"langit sangat cerah",a:"padahal"},
 {k1:"Budi memakai jas hujan",k2:"cuaca sangat cerah",a:"padahal"},
 {k1:"Jendela sudah ditutup rapat",k2:"angin masih masuk lewat celah",a:"padahal"},
@@ -311,12 +311,12 @@ const BANK=[
 {k1:"Ayah menurunkan tangga",k2:"Ayah menyimpan perkakas ke gudang",a:"kemudian"},
 {k1:"Adik menyapu teras",k2:"Adik membuang daun kering ke tong sampah",a:"kemudian"},
 {k1:"Kakak menjemur kuas bekas cat",k2:"Kakak mencuci tangannya hingga bersih",a:"kemudian"},
-{k1:"Ibu menjemur pakaian",k2:"Ayah melipat tikar",a:"dan"},
-{k1:"Adik mengambil ember",k2:"Adik mengisi air bersih",a:"serta"},
+{k1:"Ibu menjemur pakaian",k2:"Ayah melipat tikar",a:"dan",alt:["serta"]},
+{k1:"Adik mengambil ember",k2:"Adik tertawa riang",a:"serta",alt:["dan"]},
 {k1:"Kakak mau mengecat genteng",k2:"Kakak mau menambal talang",a:"atau"},
-{k1:"Cat genteng sudah pudar",k2:"Cat genteng tidak mengelupas",a:"tetapi"},
+{k1:"Cat genteng sudah pudar",k2:"Cat genteng tidak mengelupas",a:"tetapi",alt:["padahal"]},
 {k1:"Itu bukan ember cat",k2:"Itu ember air bersih",a:"melainkan"},
-{k1:"Ibu memasak di dapur",k2:"Ayah memperbaiki atap",a:"sedangkan"},
+{k1:"Ibu memasak di dapur",k2:"Ayah memperbaiki atap",a:"sedangkan",alt:["tetapi"]},
 {k1:"Genteng baru sudah dipasang",k2:"Bocor muncul di tempat lain",a:"padahal"},
 {k1:"Tangga sudah diamankan",k2:"Tali pengaman ikut dipasang",a:"bahkan"},
 {k1:"Ayah membersihkan sikat",k2:"Ayah menyimpan cat sisa",a:"lalu"},
@@ -454,10 +454,11 @@ sfx.start();
 // result
 showScoreBtn.onclick=()=>{
 lockScroll();
-let benar=0;const wrong=[];
+let benar=0;const wrong=[],altOk=[];
 current.forEach((d,i)=>{
 const v=placed[i];
 if(v===d.a)benar++;
+else if((d.alt||[]).includes(v)){benar++;altOk.push({d,i,got:v});}
 else wrong.push({d,i,got:v||"(kosong)"});
 });
 const skor=benar*10;
@@ -469,9 +470,22 @@ if(benar===10)sfx.win();else if(benar>=7)sfx.good();else sfx.tryAgain();
 const list=document.getElementById("reviewList");
 list.innerHTML="";
 document.getElementById("resTitle").textContent=benar===10?"🎉 Sempurna!":"🏆 Hasil Kamu";
-if(!wrong.length){
+if(!wrong.length&&!altOk.length){
 list.innerHTML=`<div class="revbox good"><div class="rl">🌟 Semua Benar!</div><div>Semua jawaban benar. Hebat, ${player.name}!</div></div>`;
 }else{
+if(altOk.length){
+const ha=document.createElement("div");
+ha.style.cssText="font-weight:800;font-size:.9rem;color:#1d9e57";
+ha.textContent=`Jawaban alternatif yang juga tepat (${altOk.length} soal):`;
+list.appendChild(ha);
+altOk.forEach(({d,i,got})=>{
+const el=document.createElement("div");
+el.className="revItem";
+el.innerHTML=`<div class="qnum">Soal ${i+1}</div><div class="revbox good"><div class="rl">👍 Jawabanmu juga tepat!</div><div>${combine(d,got)}</div></div><div class="why">💡 Kunci utama “${d.a}” karena konjungsi ini untuk ${WHY[d.a]}.</div>`;
+list.appendChild(el);
+});
+}
+if(wrong.length){
 const h=document.createElement("div");
 h.style.cssText="font-weight:800;font-size:.9rem;color:#b91c1c";
 h.textContent=`Perlu diperbaiki (${wrong.length} soal):`;
@@ -482,6 +496,7 @@ el.className="revItem";
 el.innerHTML=`<div class="qnum">Soal ${i+1}</div><div class="revbox bad"><div class="rl">❌ Kalimatmu:</div><div>${combine(d,got)}</div></div><div class="revbox good"><div class="rl">✅ Yang benar:</div><div>${fullSentence(d)}</div></div><div class="why">💡 Kenapa “${d.a}”? Karena konjungsi ini untuk ${WHY[d.a]}.</div>`;
 list.appendChild(el);
 });
+}
 }
 const wa=document.getElementById("waBtn");
 wa.href=`https://wa.me/6282250903536?text=${encodeURIComponent(waMessage(benar,wrong,skor))}`;
