@@ -15,7 +15,8 @@ header p{font-size:.9rem;color:#8a8496;margin-top:6px}
 #playerBadge{display:none;margin-top:10px;font-weight:800;color:#5b4a8a;background:#e9defc;border-radius:999px;padding:6px 14px;font-size:.95rem}
 .hint{background:#fff8e6;border:1px dashed #d9a521;border-radius:14px;padding:12px 14px;font-size:.85rem;margin-bottom:16px;line-height:1.6;color:#6b5f45}
 .hint .warn{display:block;margin-top:8px;font-weight:800;color:#c2274b;background:#ffe4ea;border-radius:8px;padding:6px 10px}
-.bank{background:#fffdf7;border-radius:18px;padding:16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(180,150,200,.18);position:sticky;top:8px;z-index:10;border:2px solid #f3e8ff}
+.bank{background:#ece4fb;border-radius:18px;padding:16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(180,150,200,.18);position:sticky;top:8px;z-index:10;border:2px solid #d9cfee;animation:bankGlow 3s ease-in-out infinite}
+@keyframes bankGlow{0%,100%{box-shadow:0 2px 10px rgba(180,150,200,.18),0 0 12px rgba(150,120,220,.35)}50%{box-shadow:0 2px 10px rgba(180,150,200,.18),0 0 24px rgba(150,120,220,.35)}}
 .bank h2{font-size:1rem;margin-bottom:10px;color:#7c5cbf}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{background:#e8e4fb;color:#4a4458;border:none;border-radius:999px;padding:10px 18px;min-height:44px;font-size:1rem;font-weight:700;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;box-shadow:0 2px 4px rgba(150,130,190,.3)}
@@ -77,10 +78,10 @@ html.locked,body.locked{overflow:hidden}
 .modal h2{color:#7c5cbf;margin-bottom:6px}
 .modal p.sub{font-size:.88rem;color:#8a8496;margin-bottom:14px}
 .chars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.charBtn{border:3px solid #e7defa;background:#f6f1ff;border-radius:14px;padding:12px 6px;min-height:64px;font-size:2rem;cursor:pointer}
+.charBtn{border:3px solid #e7defa;background:#f6f1ff;border-radius:14px;padding:12px 6px;min-height:64px;font-size:2rem;cursor:pointer;box-shadow:0 0 10px rgba(150,120,220,.25)}
 .charBtn small{display:block;font-size:.7rem;font-weight:700;color:#7c6f8f;margin-top:4px}
-.charBtn.picked{border-color:#b79ced;background:#e9defc}
-#nameInput{width:100%;border:2px solid #c9bff0;border-radius:12px;padding:12px;min-height:48px;font-size:1rem;margin-bottom:6px;text-align:center;background:#fff;color:#4a4458}
+.charBtn.picked{border-color:#b79ced;background:#e9defc;box-shadow:0 0 16px rgba(150,120,220,.55)}
+#nameInput{width:100%;border:2px solid #c9bff0;border-radius:12px;padding:12px;min-height:48px;font-size:1rem;margin-bottom:6px;text-align:center;background:#fff;color:#4a4458;box-shadow:0 0 10px rgba(150,120,220,.25)}
 #nameInput:focus{outline:none;border-color:#b79ced;box-shadow:0 0 0 3px #e9defc}
 #gateErr{color:#c2274b;font-size:.82rem;font-weight:700;min-height:1.2em;margin-bottom:8px}
 #startBtn{background:#b79ced;color:#3b2665;border:none;border-radius:14px;padding:14px;min-height:48px;width:100%;font-size:1rem;font-weight:800;cursor:pointer}
@@ -119,7 +120,8 @@ body.dark header p{color:#a99fc0}
 body.dark #playerBadge{background:#332a4d;color:#d6c2ff}
 body.dark .hint{background:#2a2620;border-color:#c29222;color:#e6d9b8}
 body.dark .hint .warn{background:#3a1f28;color:#ff9bb0}
-body.dark .bank{background:#211c2e;border-color:#3a2f55;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+body.dark .bank{background:#2a2340;border-color:#4a3f6b;animation:bankGlowDark 3s ease-in-out infinite}
+@keyframes bankGlowDark{0%,100%{box-shadow:0 2px 10px rgba(0,0,0,.4),0 0 12px rgba(150,110,255,.3)}50%{box-shadow:0 2px 10px rgba(0,0,0,.4),0 0 24px rgba(150,110,255,.3)}}
 body.dark .bank h2{color:#c4a8ff}
 body.dark .chip{background:#2e2742;color:#e6e1f0;box-shadow:0 2px 4px rgba(0,0,0,.4)}
 body.dark .chips .chip:nth-child(5n+1){background:#4a2a38}
@@ -153,10 +155,10 @@ body.dark .overlay{background:rgba(0,0,0,.7)}
 body.dark .modal{background:#241e33;border-color:#3a2f55;box-shadow:0 10px 40px rgba(0,0,0,.55)}
 body.dark .modal h2{color:#c4a8ff}
 body.dark .modal p.sub{color:#a99fc0}
-body.dark .charBtn{background:#2a2438;border-color:#3a2f55}
+body.dark .charBtn{background:#2a2438;border-color:#3a2f55;box-shadow:0 0 10px rgba(150,110,255,.22)}
 body.dark .charBtn small{color:#a99fc0}
-body.dark .charBtn.picked{background:#3a2f55;border-color:#b79ced}
-body.dark #nameInput{background:#2a2438;border-color:#4a3f6b;color:#e6e1f0}
+body.dark .charBtn.picked{background:#3a2f55;border-color:#b79ced;box-shadow:0 0 16px rgba(150,110,255,.45)}
+body.dark #nameInput{background:#2a2438;border-color:#4a3f6b;color:#e6e1f0;box-shadow:0 0 10px rgba(150,110,255,.22)}
 body.dark #nameInput:focus{border-color:#b79ced;box-shadow:0 0 0 3px #3a2f55}
 body.dark #gateErr{color:#ff9bb0}
 body.dark #startBtn{background:#7a5fc0;color:#fff}
@@ -200,7 +202,7 @@ body.dark #muteBtn,body.dark #themeBtn{background:#332a4d;color:#e6e1f0}
 <button class="big" id="showScore" disabled>🏆 Lihat Skor Saya</button>
 </div>
 
-<footer>Single file • Offline • Bisa dibuka di HP / laptop</footer>
+<footer>Single file • Offline • Bisa dibuka di HP / laptop<br>Dibuat oleh : Arifin Hakim, S.Pd. - Guru Kelas 4</footer>
 </div>
 
 <div class="overlay" id="gate">
